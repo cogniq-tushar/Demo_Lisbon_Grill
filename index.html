@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisbon Grill - A Taste of Portugal in Jericho</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* General Styling */
+        :root {
+            --primary-color: #0d2c4e;
+            --secondary-color: #b98b59;
+            --background-color: #fdfdfd;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 20px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: transparent;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.4s, padding 0.4s;
+        }
+        
+        .header.scrolled {
+            background-color: var(--primary-color);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--light-text-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 5px;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #home {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80) no-repeat center center/cover;
+            background-attachment: fixed;
+            color: var(--light-text-color);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #home h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+        }
+        
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        /* About Section */
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        #about .about-image img {
+            width: 100%;
+            max-width: 400px; 
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Menu Section */
+        .menu-tabs {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .tab-button {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0 10px;
+            border-radius: 50px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .tab-button.active, .tab-button:hover {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+
+        .menu-content { display: none; }
+        .menu-content.active { display: block; }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .menu-category h3 {
+           font-family: 'Playfair Display', serif;
+           font-size: 1.8rem;
+           color: var(--primary-color);
+           margin-bottom: 20px;
+           border-bottom: 2px solid var(--secondary-color);
+           padding-bottom: 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: flex-end;
+        }
+        
+        .menu-item-details { max-width: 80%; }
+        .menu-item-name { font-weight: bold; color: var(--text-color); }
+        .menu-item-description { font-style: italic; font-size: 0.9rem; color: #666; }
+        .menu-item-price { font-weight: bold; color: var(--secondary-color); }
+
+        /* Catering Section */
+        #catering {
+            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+        }
+        #catering form {
+            max-width: 800px;
+            margin: auto;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .full-width { grid-column: 1 / -1; }
+        #catering input, #catering select, #catering textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #catering button {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        #catering button:hover { background: var(--secondary-color); }
+
+        /* Reviews & Gift Cards (Compact Version) */
+        .promo-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px; /* Reduced spacing */
+            align-items: stretch;
+            padding: 20px;
+        }
+
+        .promo-card {
+            text-align: center;
+            background: #fff;
+            padding: 20px; /* Reduced padding */
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            max-width: 450px; /* Optional: keeps both cards narrower */
+            margin: 0 auto; /* Centers both cards */
+        }
+
+        .promo-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 1.5rem; /* Smaller title */
+            margin-bottom: 10px;
+        }
+
+        .promo-card img {
+            max-width: 100%;
+            height: 180px; /* Smaller image */
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .review-icons { margin-top: 10px; }
+
+        .review-icons a {
+            margin: 0 10px;
+            font-size: 2rem; /* Slightly smaller icons */
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .review-icons a:hover { color: var(--secondary-color); }
+
+
+        
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 44, 78, 0.7);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 1.5rem;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        #contact .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .contact-card {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .contact-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-color);
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Animations & Responsive Design */
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            font-size: 2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--primary-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease-in-out;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 20px 0;
+            }
+            .mobile-nav-toggle {
+                display: block;
+                z-index: 1001; /* Above nav links */
+            }
+            .close-icon {
+                display: none;
+            }
+            
+            #home h1 { font-size: 3rem; }
+            #home p { font-size: 1.2rem; }
+            #about .about-content, .promo-section { grid-template-columns: 1fr; }
+            #catering form { grid-template-columns: 1fr; padding: 20px; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="container">
+            <a href="#home" class="logo">Lisbon Grill</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menus">Menus</a></li>
+                <li><a href="#catering">Catering</a></li>
+                <li><a href="#promo">Reviews & Gifts</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+             <button class="mobile-nav-toggle">
+                <i class="fas fa-bars open-icon"></i>
+                <i class="fas fa-times close-icon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h1>A Taste of Portugal in Jericho</h1>
+            <p>Authentic flavors, family atmosphere. Your table is waiting.</p>
+            <a href="#menus" class="btn">View Our Menus</a>
+        </section>
+
+        <section id="about" class="container">
+            <div class="about-content hidden">
+                <div class="about-text">
+                    <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+                        <h2 style="font-size: 2.5rem;">Our Story</h2>
+                    </div>
+                    <p>The Lisbon Grill offers an extensive menu, filled with different variety. We also love to serve our food in a family-style setting. You can always order your favorite dishes for two and split it with your loved ones.</p>
+                    <p>Our restaurant is all about family. We love having a place where everyone can come and have a good time. We even have our own kids-menu for all of the wonderful children. Our goal is to give you a little taste of Portugal and have you leaving with a smile on your face. Book your reservation today!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Interior of Lisbon Grill">
+                </div>
+            </div>
+        </section>
+
+        <section id="menus" class="container hidden">
+            <div class="section-header">
+                <h2>Our Menus</h2>
+            </div>
+            <div class="menu-tabs">
+                <button class="tab-button active" onclick="openMenu(event, 'lunch')">Lunch Menu</button>
+                <button class="tab-button" onclick="openMenu(event, 'dinner')">Dinner Menu</button>
+            </div>
+
+            <div id="lunch" class="menu-content active">
+                <div class="menu-grid">
+                    <div class="menu-category">
+                        <h3>Appetizers</h3>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Ameijoas a Portuguesa</div><div class="menu-item-description">Steamed clams with port sausage, peppers and onions</div></div><div class="menu-item-price">14.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Polvo a Lagareiro</div><div class="menu-item-description">Grilled octopus with roasted peppers, onions, olive oil and garlic</div></div><div class="menu-item-price">15.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Bolinhos de Bacalhau</div><div class="menu-item-description">Cod fish cakes</div></div><div class="menu-item-price">13.95</div></div>
+                    </div>
+                    <div class="menu-category">
+                        <h3>Pastas</h3>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Linguini Fruta del Mar</div><div class="menu-item-description">Linguini with seafood</div></div><div class="menu-item-price">$26.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Penne Pasta with Vodka Sauce</div><div class="menu-item-description">With chicken or shrimp</div></div><div class="menu-item-price">$22.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Ravioli stuffed with lobster</div></div><div class="menu-item-price">$26.95</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dinner" class="menu-content">
+                 <div class="menu-grid">
+                    <div class="menu-category">
+                        <h3>Fish & Seafood</h3>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Paelha Valenciana</div><div class="menu-item-description">Seafood combo w/ chicken, pork sausage and saffron rice</div></div><div class="menu-item-price">33.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Grilled Salmon and Seafood Combo</div></div><div class="menu-item-price">31.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Lobster Champagne</div><div class="menu-item-description">with shrimp and scallops in a champagne sauce</div></div><div class="menu-item-price">39.95</div></div>
+                    </div>
+                     <div class="menu-category">
+                        <h3>Portuguese Specialties</h3>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Bacalhau a Lagareiro</div><div class="menu-item-description">Grilled codfish with garlic, olive oil, and potatoes</div></div><div class="menu-item-price">32.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Chanfana de Cabrito</div><div class="menu-item-description">Braised goat</div></div><div class="menu-item-price">31.95</div></div>
+                        <div class="menu-item"><div class="menu-item-details"><div class="menu-item-name">Carne de Porco a Alentejana</div><div class="menu-item-description">Pork and clams</div></div><div class="menu-item-price">27.95</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catering" class="hidden">
+             <div class="section-header">
+                <h2>Catering & Private Events</h2>
+             </div>
+             <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto;">Let us host your next special event! Please complete the form below and we will contact you shortly.</p>
+            <form>
+                <div class="form-group"><label for="name">Name:</label><input type="text" id="name" name="name" required></div>
+                <div class="form-group"><label for="email">Email:</label><input type="email" id="email" name="email" required placeholder="john@example.com"></div>
+                <div class="form-group"><label for="phone">Phone #:</label><input type="tel" id="phone" name="phone" placeholder="555-555-5555"></div>
+                <div class="form-group"><label for="guests">Number of Guests:</label><input type="number" id="guests" name="guests"></div>
+                <div class="form-group"><label for="date">Date of Event:</label><input type="date" id="date" name="date"></div>
+                <div class="form-group"><label for="time">Time of Event:</label><input type="time" id="time" name="time"></div>
+                <div class="form-group full-width"><label for="info">Additional Info:</label><textarea id="info" name="info" rows="4"></textarea></div>
+                <button type="submit" class="full-width btn">Submit Request</button>
+            </form>
+        </section>
+        
+        <section id="promo" class="container hidden">
+             <div class="promo-section">
+                 <div id="reviews" class="promo-card">
+                    <h3>Share Your Experience</h3>
+                    <p>Our business thrives on positive reviews from happy customers like you. Click an icon below to leave your review.</p>
+                    <div class="review-icons">
+                        <a href="#" aria-label="Google Reviews"><i class="fab fa-google"></i></a>
+                        <a href="#" aria-label="Yelp Reviews"><i class="fab fa-yelp"></i></a>
+                        <a href="#" aria-label="TripAdvisor Reviews"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                <div id="gift-cards" class="promo-card">
+                    <h3>The Perfect Gift</h3>
+                    <img src="giftcard.jpg" alt="giftcard">
+                    <p>Give the gift of a Lisbon Grill Gift Card, perfect for any occasion. Call us at <strong>516-742-9797</strong> to purchase.</p>
+                </div>
+             </div>
+        </section>
+
+        <section id="gallery" class="hidden">
+    <div class="section-header">
+        <h2>Our Gallery</h2>
+    </div>
+    <div class="container">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="seafood.jpg" alt="Seafood Dish 1">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="seafood1.jpg" alt="Seafood Dish 2">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="seafood2.jpg" alt="Seafood Dish 3">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="seafood3.jpg" alt="Seafood Dish 4">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="seafood4.jpg" alt="Seafood Dish 5">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="seafood5.jpg" alt="Seafood Dish 6">
+                <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <section id="contact" class="hidden">
+             <div class="section-header">
+                <h2>Visit Us</h2>
+            </div>
+            <div class="container">
+                <div class="contact-info-grid">
+                    <div class="contact-card">
+                        <h3>Location</h3>
+                        <p>241 Mineola Blvd<br>Mineola, NY 11501</p>
+                        <p><strong>Tel:</strong> 516-742-9797</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Hours</h3>
+                        <p>Mon - Thu: 12:00pm - 10:00pm</p>
+                        <p>Fri & Sat: 12:00pm - 10:30pm</p>
+                        <p>Sunday: 12:00pm - 9:00pm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Copyright 2024. Lisbon Grill. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT FOR FUNCTIONALITY ---
+        
+        // 1. Menu Tabs
+        function openMenu(evt, menuName) {
+            var i, menuContent, tabButton;
+            menuContent = document.getElementsByClassName("menu-content");
+            for (i = 0; i < menuContent.length; i++) {
+                menuContent[i].style.display = "none";
+            }
+            tabButton = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButton.length; i++) {
+                tabButton[i].className = tabButton[i].className.replace(" active", "");
+            }
+            document.getElementById(menuName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 2. Header Style on Scroll
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 3. Mobile Navigation
+            const navToggle = document.querySelector('.mobile-nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const openIcon = document.querySelector('.open-icon');
+            const closeIcon = document.querySelector('.close-icon');
+
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                openIcon.style.display = navLinks.classList.contains('active') ? 'none' : 'block';
+                closeIcon.style.display = navLinks.classList.contains('active') ? 'block' : 'none';
+            });
+            
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                         navLinks.classList.remove('active');
+                         openIcon.style.display = 'block';
+                         closeIcon.style.display = 'none';
+                    }
+                });
+            });
+
+            // 4. Fade-in Animation on Scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            const hiddenElements = document.querySelectorAll('.hidden');
+            hiddenElements.forEach(el => observer.observe(el));
+            
+             // 5. Active Nav Link on Scroll
+            const sections = document.querySelectorAll('main section');
+            const navLinksA = document.querySelectorAll('nav a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinksA.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href').substring(1) === current) {
+                        a.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
